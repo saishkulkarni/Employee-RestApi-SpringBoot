@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("/api/v1")
 public class EmployeeController {
@@ -22,6 +24,7 @@ public class EmployeeController {
 	EmployeeService service;
 
 	// Save One Employee
+	@Operation(summary = "Save One EMployee")
 	@PostMapping("/employees")
 	public ResponseEntity<ResponseStructure<Employee>> saveEmployee(@RequestBody Employee employee) {
 		return service.save(employee);
