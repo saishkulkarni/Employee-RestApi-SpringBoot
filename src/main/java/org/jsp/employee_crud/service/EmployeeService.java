@@ -109,4 +109,25 @@ public class EmployeeService {
 		return new ResponseEntity<ResponseStructure<Employee>>(structure, HttpStatus.OK);
 	}
 
+	public ResponseEntity<ResponseStructure<Employee>> update(Employee employee) {
+		repository.save(employee);
+		structure.setMessage("Data Updated Success");
+		structure.setData(employee);
+		return new ResponseEntity<ResponseStructure<Employee>>(structure, HttpStatus.OK);
+	}
+
+	public ResponseEntity<ResponseStructure<Employee>> updateEmployee(Employee employee, int id) {
+		Employee emp = repository.findById(id).orElseThrow(() -> new DataNotFoundException());
+		if (employee.getName() != null)
+			emp.setName(employee.getName());
+		if (employee.getMobile() != 0)
+			emp.setMobile(employee.getMobile());
+		if (employee.getSalary() != 0)
+			emp.setSalary(employee.getSalary());
+		repository.save(emp);
+		structure.setMessage("Data Updated Success");
+		structure.setData(employee);
+		return new ResponseEntity<ResponseStructure<Employee>>(structure, HttpStatus.OK);
+	}
+
 }
